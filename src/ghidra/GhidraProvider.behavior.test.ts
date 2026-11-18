@@ -1564,9 +1564,7 @@ describe("Ghidra client projection", () => {
       expect.stringContaining("The bridge is verified against"),
     );
     expect(result.value.limitations).toEqual(
-      expect.arrayContaining([
-        ...ghidraKnownProviderDefectLimitations("12.2"),
-      ]),
+      expect.arrayContaining([...ghidraKnownProviderDefectLimitations("12.2")]),
     );
     expect(startCount).toBe(1);
   });
