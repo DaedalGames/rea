@@ -122,7 +122,7 @@ import {
 } from "./GhidraRiscvProfile.js";
 import { ghidraPePdbLimitations } from "./GhidraPeProfile.js";
 import {
-  ghidraKnownProviderDefectLimitation,
+  ghidraKnownProviderDefectLimitations,
   unverifiedGhidraBuildLimitation,
 } from "./GhidraReleasePolicy.js";
 import { GhidraHeadlessLauncher, GhidraLaunchError } from "./GhidraLauncher.js";
@@ -871,7 +871,7 @@ export const createGhidraProviderClient = (input: {
   const releaseLimitation = unverifiedGhidraBuildLimitation(
     prerequisites.value.providerVersion,
   );
-  const knownDefectLimitation = ghidraKnownProviderDefectLimitation(
+  const knownDefectLimitations = ghidraKnownProviderDefectLimitations(
     prerequisites.value.providerVersion,
   );
   const sessionLimitations = (): readonly string[] => {
@@ -896,7 +896,7 @@ export const createGhidraProviderClient = (input: {
       ...disabledAnalyzerLimitations,
       ...pdbLimitations,
       ...(releaseLimitation === undefined ? [] : [releaseLimitation]),
-      ...(knownDefectLimitation === undefined ? [] : [knownDefectLimitation]),
+      ...knownDefectLimitations,
     ];
   };
   const nativeAotOwner =
